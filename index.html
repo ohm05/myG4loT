@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Firebase Switch</title>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 100px;
+    }
+    button {
+      font-size: 24px;
+      padding: 15px 40px;
+      margin: 10px;
+      cursor: pointer;
+    }
+    .on {
+      background-color: green;
+      color: white;
+    }
+    .off {
+      background-color: red;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>ควบคุมสถานะอุปกรณ์</h1>
+  <button class="on" onclick="setStatus(1)">เปิด</button>
+  <button class="off" onclick="setStatus(0)">ปิด</button>
+
+  <script>
+    // Firebase config
+    const firebaseConfig = {
+     apiKey: "AIzaSyBVAUajXMaY9GJ_IoItTjd6cljOSFfgDQA",
+     authDomain: "myg4lot-8a447.firebaseapp.com",
+     projectId: "myg4lot-8a447",
+     storageBucket: "myg4lot-8a447.firebasestorage.app",
+     messagingSenderId: "691664730188",
+     appId: "1:691664730188:web:bf0d5fa6269dcc774cdce9",
+     measurementId: "G-CDZBJ9QQXJ"
+    };
+
+    // Init Firebase
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+
+    // Function to set status
+    function setStatus(value) {
+      db.collection("devices").doc("device1").set({
+        status: value
+      }).then(() => {
+        alert("สถานะถูกเปลี่ยนเป็น " + value);
+      }).catch((error) => {
+        console.error("เกิดข้อผิดพลาด: ", error);
+      });
+    }
+  </script>
+
+</body>
+</html>
