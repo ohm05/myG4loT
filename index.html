@@ -1,16 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Firebase Switch</title>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 100px;
+    }
+    button {
+      font-size: 24px;
+      padding: 15px 40px;
+      margin: 10px;
+      cursor: pointer;
+    }
+    .on {
+      background-color: green;
+      color: white;
+    }
+    .off {
+      background-color: red;
+      color: white;
+    }
+  </style>
+</head>
 <body>
 
   <h1>ควบคุมสถานะอุปกรณ์</h1>
 
-  <!-- ปุ่มชุดแรก: device1 -->
-  <button class="on" onclick="setStatus(1)">เปิด</button>
-  <button class="off" onclick="setStatus(0)">ปิด</button>
+  <!-- อุปกรณ์ 1 -->
+  <div style="margin-bottom: 30px;">
+    <button class="on" onclick="setStatus(1)">เปิด</button>
+    <button class="off" onclick="setStatus(0)">ปิด</button>
+  </div>
 
-  <br><br>
-
-  <!-- ปุ่มชุดที่สอง: device2 -->
-  <button class="on" onclick="setStatus2(1)">เปิด (อุปกรณ์ 2)</button>
-  <button class="off" onclick="setStatus2(0)">ปิด (อุปกรณ์ 2)</button>
+  <!-- อุปกรณ์ 2 -->
+  <div>
+    <button class="on" onclick="setStatus2(1)">เปิด (อุปกรณ์ 2)</button>
+    <button class="off" onclick="setStatus2(0)">ปิด (อุปกรณ์ 2)</button>
+  </div>
 
   <script>
     // Firebase config
@@ -28,7 +59,7 @@
     firebase.initializeApp(firebaseConfig);
     const db = firebase.firestore();
 
-    // ปุ่มชุดแรก
+    // อุปกรณ์ 1
     function setStatus(value) {
       db.collection("devices").doc("device1").set({
         status: value
@@ -39,7 +70,7 @@
       });
     }
 
-    // ปุ่มชุดที่สอง
+    // อุปกรณ์ 2
     function setStatus2(value) {
       db.collection("devices").doc("device2").set({
         status: value
@@ -52,3 +83,5 @@
   </script>
 
 </body>
+</html>
+
