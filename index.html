@@ -9,30 +9,53 @@
     body {
       font-family: Arial, sans-serif;
       text-align: center;
-      margin-top: 100px;
+      margin-top: 50px;
+      background-color: #f9f9f9;
     }
+
+    h1 {
+      margin-bottom: 40px;
+    }
+
+    .device-box {
+      display: inline-block;
+      border: 2px solid #ccc;
+      border-radius: 12px;
+      padding: 30px 50px;
+      margin: 20px;
+      background-color: white;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
     button {
-      font-size: 24px;
-      padding: 15px 40px;
+      font-size: 20px;
+      padding: 10px 30px;
       margin: 10px;
       cursor: pointer;
+      border: none;
+      border-radius: 6px;
     }
+
     .on {
       background-color: green;
       color: white;
     }
+
     .off {
       background-color: red;
       color: white;
     }
+
     .status-text {
-      font-size: 20px;
+      font-size: 18px;
       font-weight: bold;
-      margin-top: 10px;
+      margin-top: 15px;
     }
+
     .green {
       color: green;
     }
+
     .red {
       color: red;
     }
@@ -43,14 +66,16 @@
   <h1>ควบคุมสถานะอุปกรณ์</h1>
 
   <!-- อุปกรณ์ 1 -->
-  <div style="margin-bottom: 30px;">
+  <div class="device-box">
+    <h2>อุปกรณ์ 1</h2>
     <button class="on" onclick="setStatus(1)">เปิด</button>
     <button class="off" onclick="setStatus(0)">ปิด</button>
     <p id="status1" class="status-text">สถานะ: -</p>
   </div>
 
   <!-- อุปกรณ์ 2 -->
-  <div>
+  <div class="device-box">
+    <h2>อุปกรณ์ 2</h2>
     <button class="on" onclick="setStatus2(1)">เปิด</button>
     <button class="off" onclick="setStatus2(0)">ปิด</button>
     <p id="status2" class="status-text">สถานะ: -</p>
@@ -103,4 +128,3 @@
 
 </body>
 </html>
-
