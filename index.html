@@ -31,16 +31,16 @@
 
   <h1>ควบคุมสถานะอุปกรณ์</h1>
 
-  <!-- อุปกรณ์ 1 -->
+  <!-- ปุ่มแถวที่ 1 -->
   <div style="margin-bottom: 30px;">
     <button class="on" onclick="setStatus(1)">เปิด</button>
     <button class="off" onclick="setStatus(0)">ปิด</button>
   </div>
 
-  <!-- อุปกรณ์ 2 -->
+  <!-- ปุ่มแถวที่ 2 -->
   <div>
-    <button class="on" onclick="setStatus2(1)">เปิด (อุปกรณ์ 2)</button>
-    <button class="off" onclick="setStatus2(0)">ปิด (อุปกรณ์ 2)</button>
+    <button class="on" onclick="setStatus(1)">เปิด</button>
+    <button class="off" onclick="setStatus(0)">ปิด</button>
   </div>
 
   <script>
@@ -59,23 +59,12 @@
     firebase.initializeApp(firebaseConfig);
     const db = firebase.firestore();
 
-    // อุปกรณ์ 1
+    // ฟังก์ชันเดียว ใช้ได้กับทุกปุ่ม (ถ้าควบคุมอุปกรณ์เดียวกัน)
     function setStatus(value) {
       db.collection("devices").doc("device1").set({
         status: value
       }).then(() => {
-        alert("อุปกรณ์ 1 ถูกเปลี่ยนสถานะเป็น " + (value === 1 ? "เปิด" : "ปิด"));
-      }).catch((error) => {
-        console.error("เกิดข้อผิดพลาด: ", error);
-      });
-    }
-
-    // อุปกรณ์ 2
-    function setStatus2(value) {
-      db.collection("devices").doc("device2").set({
-        status: value
-      }).then(() => {
-        alert("อุปกรณ์ 2 ถูกเปลี่ยนสถานะเป็น " + (value === 1 ? "เปิด" : "ปิด"));
+        alert("สถานะถูกเปลี่ยนเป็น " + (value === 1 ? "เปิด" : "ปิด"));
       }).catch((error) => {
         console.error("เกิดข้อผิดพลาด: ", error);
       });
