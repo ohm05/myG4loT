@@ -25,22 +25,35 @@
       background-color: red;
       color: white;
     }
+    .status-text {
+      font-size: 20px;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+    .green {
+      color: green;
+    }
+    .red {
+      color: red;
+    }
   </style>
 </head>
 <body>
 
   <h1>ควบคุมสถานะอุปกรณ์</h1>
 
-  <!-- ปุ่มแถวที่ 1 -->
+  <!-- อุปกรณ์ 1 -->
   <div style="margin-bottom: 30px;">
     <button class="on" onclick="setStatus(1)">เปิด</button>
     <button class="off" onclick="setStatus(0)">ปิด</button>
+    <p id="status1" class="status-text">สถานะ: -</p>
   </div>
 
-  <!-- ปุ่มแถวที่ 2 -->
+  <!-- อุปกรณ์ 2 -->
   <div>
-    <button class="on" onclick="setStatus(1)">เปิด</button>
-    <button class="off" onclick="setStatus(0)">ปิด</button>
+    <button class="on" onclick="setStatus2(1)">เปิด</button>
+    <button class="off" onclick="setStatus2(0)">ปิด</button>
+    <p id="status2" class="status-text">สถานะ: -</p>
   </div>
 
   <script>
@@ -59,12 +72,29 @@
     firebase.initializeApp(firebaseConfig);
     const db = firebase.firestore();
 
-    // ฟังก์ชันเดียว ใช้ได้กับทุกปุ่ม (ถ้าควบคุมอุปกรณ์เดียวกัน)
     function setStatus(value) {
       db.collection("devices").doc("device1").set({
         status: value
       }).then(() => {
-        alert("สถานะถูกเปลี่ยนเป็น " + (value === 1 ? "เปิด" : "ปิด"));
+        const statusText = value === 1 ? "เปิด" : "ปิด";
+        const colorClass = value === 1 ? "green" : "red";
+        const statusEl = document.getElementById("status1");
+        statusEl.textContent = "สถานะ: " + statusText;
+        statusEl.className = "status-text " + colorClass;
+      }).catch((error) => {
+        console.error("เกิดข้อผิดพลาด: ", error);
+      });
+    }
+
+    function setStatus2(value) {
+      db.collection("devices").doc("device2").set({
+        status: value
+      }).then(() => {
+        const statusText = value === 1 ? "เปิด" : "ปิด";
+        const colorClass = value === 1 ? "green" : "red";
+        const statusEl = document.getElementById("status2");
+        statusEl.textContent = "สถานะ: " + statusText;
+        statusEl.className = "status-text " + colorClass;
       }).catch((error) => {
         console.error("เกิดข้อผิดพลาด: ", error);
       });
