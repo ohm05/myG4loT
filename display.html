@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>แสดงสถานะ</title>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+  <style>
+    body { font-size: 24px; text-align: center; padding-top: 100px; }
+    .status-on { color: green; }
+    .status-off { color: red; }
+  </style>
+</head>
+<body>
+  <h2>สถานะอุปกรณ์</h2>
+  <div id="status" class="status-off">กำลังโหลด...</div>
+
+  <script>
+    const firebaseConfig = {
+     apiKey: "AIzaSyBVAUajXMaY9GJ_IoItTjd6cljOSFfgDQA",
+     authDomain: "myg4lot-8a447.firebaseapp.com",
+     projectId: "myg4lot-8a447",
+     storageBucket: "myg4lot-8a447.firebasestorage.app",
+     messagingSenderId: "691664730188",
+     appId: "1:691664730188:web:bf0d5fa6269dcc774cdce9",
+     measurementId: "G-CDZBJ9QQXJ"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+
+    const statusDiv = document.getElementById("status");
+
+    db.collection("devices").doc("device1")
+      .onSnapshot((doc) => {
+        if (doc.exists) {
+          const status = doc.data().status;
+          if (status === 1) {
+            statusDiv.textContent = "เปิด";
+            statusDiv.className = "status-on";
+          } else {
+            statusDiv.textContent = "ปิด";
+            statusDiv.className = "status-off";
+          }
+        } else {
+          statusDiv.textContent = "ไม่มีข้อมูล";
+        }
+      });
+  </script>
+</body>
+</html>
